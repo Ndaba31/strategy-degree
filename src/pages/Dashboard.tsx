@@ -1,10 +1,15 @@
+import { Typography } from '@mui/material'
 import React from 'react'
+import Sidebar from '../components/Sidebar'
 
 type Props = {}
 
 const Dashboard = (props: Props) => {
     return (
-        <div>Dashboard</div>
+        <React.Fragment>
+            <Sidebar />
+            <Typography variant='h1'>Dashboard</Typography>
+        </React.Fragment>
     )
 }
 
