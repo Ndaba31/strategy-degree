@@ -1,14 +1,9 @@
 import { ArrowDropUp, ArrowDropDown } from '@mui/icons-material';
-import { Drawer, List, ListItem, ListItemButton, ListItemText, MenuItem, MenuList, useTheme, Grid, Typography, Divider, Toolbar } from '@mui/material';
+import { List, ListItem, ListItemButton, ListItemText, MenuItem, MenuList, useTheme, Grid, Typography, Divider } from '@mui/material';
 import Grow from '@mui/material/Grow';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
-
-type Props = {
-}
-
-const drawerWidth = 300;
 
 const tabs = [
     {
@@ -58,7 +53,7 @@ const tabs = [
     }
 ]
 
-const Sidebar = () => {
+const SidebarContent = () => {
     const theme = useTheme();
     const navigate = useNavigate()
     const [open, setOpen] = React.useState(false);
@@ -68,23 +63,7 @@ const Sidebar = () => {
     };
 
     return (
-        <Drawer
-            variant='permanent'
-            anchor='left'
-            sx={{
-                width: drawerWidth,
-                '& .MuiDrawer-paper': {
-                    width: drawerWidth,
-                    boxSizing: 'border-box',
-                    border: '3px solid',
-                    borderTopRightRadius: 10,
-                    borderBottomRightRadius: 10,
-                    // backgroundColor: '#E3C9D7',
-                    backgroundColor: 'lightgrey',
-                    borderColor: theme.palette.primary.main,
-                },
-            }}
-        >
+        <React.Fragment>
             <Grid container spacing={2} marginBottom={2}>
                 <Grid item xs={4}>
                     <img src='360dbslogo.png' alt='Company Logo' style={{ width: '100px', height: '100px', borderBottomRightRadius: '10px', borderTopRightRadius: '10px' }} />
@@ -137,8 +116,8 @@ const Sidebar = () => {
                     }
                 })}
             </List>
-        </Drawer>
+        </React.Fragment>
     )
 }
 
-export default Sidebar
+export default SidebarContent
