@@ -1,5 +1,5 @@
 import { ArrowDropUp, ArrowDropDown } from '@mui/icons-material';
-import { List, ListItem, ListItemButton, ListItemText, MenuItem, MenuList, useTheme, Grid, Typography, Divider } from '@mui/material';
+import { List, ListItem, ListItemButton, ListItemText, MenuItem, MenuList, useTheme, Grid, Typography, Divider, ListSubheader } from '@mui/material';
 import Grow from '@mui/material/Grow';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import React from 'react'
@@ -64,16 +64,18 @@ const SidebarContent = () => {
 
     return (
         <React.Fragment>
-            <Grid container spacing={2} marginBottom={2}>
-                <Grid item xs={4}>
-                    <img src='360dbslogo.png' alt='Company Logo' style={{ width: '100px', height: '100px', borderBottomRightRadius: '10px', borderTopRightRadius: '10px' }} />
-                </Grid>
-                <Grid item xs={8} alignItems='center' height='100px' display='flex'>
-                    <Typography marginLeft={1} fontWeight='bold' textTransform='capitalize'>360 Degrees Business Solutions</Typography>
-                </Grid>
-            </Grid>
-            <Divider sx={{ backgroundColor: theme.palette.secondary.main }} />
-            <List>
+            <List subheader={<Grid />}>
+                <ListSubheader>
+                    <Grid container spacing={2} marginBottom={2}>
+                        <Grid item xs={4}>
+                            <img src='360dbslogo.png' alt='Company Logo' style={{ width: '100px', height: '100px', borderBottomRightRadius: '10px', borderTopRightRadius: '10px' }} />
+                        </Grid>
+                        <Grid item xs={8} alignItems='center' height='100px' display='flex'>
+                            <Typography marginLeft={1} fontWeight='bold' textTransform='capitalize'>360 Degrees Business Solutions</Typography>
+                        </Grid>
+                    </Grid>
+                </ListSubheader>
+                <Divider sx={{ backgroundColor: theme.palette.secondary.main }} />
                 {tabs.map((tab, index) => {
                     if (tab.sub_tabs === undefined) {
                         return (
