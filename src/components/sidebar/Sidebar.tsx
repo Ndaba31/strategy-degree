@@ -51,7 +51,6 @@ const Sidebar = () => {
                         borderTop: 'none',
                         borderTopRightRadius: 10,
                         borderBottomRightRadius: 10,
-                        // backgroundColor: '#E3C9D7',
                         backgroundColor: 'lightgrey',
                         borderColor: theme.palette.primary.main,
                     },

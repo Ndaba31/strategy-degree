@@ -1,5 +1,6 @@
 import { Typography } from '@mui/material'
 import React from 'react'
+import NavBar from '../components/header/NavBar'
 import Sidebar from '../components/sidebar/Sidebar'
 
 type Props = {}
@@ -7,8 +8,9 @@ type Props = {}
 const Dashboard = (props: Props) => {
     return (
         <React.Fragment>
-            <Sidebar />
-            <Typography variant='h1'>Dashboard</Typography>
+            <NavBar />
+            {/* <Sidebar /> */}
+            {/* <Typography variant='h1'>Dashboard</Typography> */}
         </React.Fragment>
     )
 }
