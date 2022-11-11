@@ -1,10 +1,13 @@
 import React from 'react'
+import Layout from '../components/layout/Layout'
 
 type Props = {}
 
 const Swot = (props: Props) => {
     return (
-        <div>Swot</div>
+        <Layout>
+            <h1>SWOT</h1>
+        </Layout>
     )
 }
 

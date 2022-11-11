@@ -1,9 +1,8 @@
 import { ArrowDropUp, ArrowDropDown } from '@mui/icons-material';
-import { List, ListItem, ListItemButton, ListItemText, MenuItem, MenuList, useTheme, Grid, Typography, Divider, ListSubheader } from '@mui/material';
+import { List, ListItem, ListItemButton, ListItemText, useTheme, Grid, Typography, Divider, ListSubheader, Box, Toolbar } from '@mui/material';
 import Grow from '@mui/material/Grow';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import React from 'react'
-import { useNavigate } from 'react-router-dom';
 
 const tabs = [
     {
@@ -55,7 +54,6 @@ const tabs = [
 
 const SidebarContent = () => {
     const theme = useTheme();
-    const navigate = useNavigate()
     const [open, setOpen] = React.useState(false);
 
     const handleToggle = () => {
@@ -64,60 +62,67 @@ const SidebarContent = () => {
 
     return (
         <React.Fragment>
-            <List subheader={<Grid />}>
-                <ListSubheader>
-                    <Grid container spacing={2} marginBottom={2}>
-                        <Grid item xs={4}>
-                            <img src='360dbslogo.png' alt='Company Logo' style={{ width: '100px', height: '100px', borderBottomRightRadius: '10px', borderTopRightRadius: '10px' }} />
+            <Toolbar sx={{ backgroundColor: 'white' }} />
+            <Box sx={{ overflow: 'auto' }}>
+                <List subheader={<Grid />}>
+                    <ListSubheader sx={{ borderRight: '2px solid', borderColor: 'lightgrey' }}>
+                        <Grid container spacing={2} marginBottom={2}>
+                            <Grid item xs={4}>
+                                <img src='360dbslogo.png' alt='Company Logo' style={{ width: '100px', height: '100px', borderBottomRightRadius: '10px', borderTopRightRadius: '10px' }} />
+                            </Grid>
+                            <Grid item xs={8} alignItems='center' height='100px' display='flex'>
+                                <Typography marginLeft={1} fontWeight='bold' textTransform='capitalize'>360 Degrees Business Solutions</Typography>
+                            </Grid>
                         </Grid>
-                        <Grid item xs={8} alignItems='center' height='100px' display='flex'>
-                            <Typography marginLeft={1} fontWeight='bold' textTransform='capitalize'>360 Degrees Business Solutions</Typography>
-                        </Grid>
-                    </Grid>
-                </ListSubheader>
-                <Divider sx={{ backgroundColor: theme.palette.secondary.main }} />
-                {tabs.map((tab, index) => {
-                    if (tab.sub_tabs === undefined) {
-                        return (
-                            <ListItem key={index}>
-                                <ListItemButton href={tab.link} divider>
-                                    <ListItemText>
-                                        {tab.tab}
-                                    </ListItemText>
-                                </ListItemButton>
-                            </ListItem>
-                        )
-                    } else {
-                        return (
-                            <ListItem key={index} sx={{ display: 'block' }}>
-                                <ListItemButton
-                                    onClick={handleToggle}
-                                    divider
-                                >
-                                    <ListItemText>
-                                        {tab.tab}
-                                    </ListItemText>
-                                    <ListItemIcon>
-                                        {open ? <ArrowDropUp /> : <ArrowDropDown />}
-                                    </ListItemIcon>
-                                </ListItemButton>
-                                <Grow
-                                    in={open}
-                                    {...(open ? { timeout: 1000 } : {})}
-                                >
-                                    <MenuList sx={{ display: open ? 'initial' : 'none' }}>
-                                        {tab.sub_tabs.map(({ sub, link }) => (
-                                            <MenuItem key={sub} onClick={() => navigate(link)}>
-                                                {sub}
-                                            </MenuItem>
-                                        ))}
-                                    </MenuList>
-                                </Grow>
-                            </ListItem>
-                        )
-                    }
-                })}
-            </List>
+                    </ListSubheader>
+                    <Divider sx={{ backgroundColor: theme.palette.secondary.main }} />
+                    {tabs.map((tab, index) => {
+                        if (tab.sub_tabs === undefined) {
+                            return (
+                                <ListItem key={index}>
+                                    <ListItemButton href={tab.link} divider>
+                                        <ListItemText>
+                                            {tab.tab}
+                                        </ListItemText>
+                                    </ListItemButton>
+                                </ListItem>
+                            )
+                        } else {
+                            return (
+                                <ListItem key={index} sx={{ display: 'block' }}>
+                                    <ListItemButton
+                                        onClick={handleToggle}
+                                        divider
+                                    >
+                                        <ListItemText>
+                                            {tab.tab}
+                                        </ListItemText>
+                                        <ListItemIcon>
+                                            {open ? <ArrowDropUp /> : <ArrowDropDown />}
+                                        </ListItemIcon>
+                                    </ListItemButton>
+                                    <Grow
+                                        in={open}
+                                        {...(open ? { timeout: 1000 } : {})}
+                                    >
+                                        <List sx={{ display: open ? 'initial' : 'none' }}>
+                                            {tab.sub_tabs.map(({ sub, link }) => (
+                                                <ListItem key={sub}>
+                                                    <ListItemButton href={link}>
+                                                        <ListItemText>
+                                                            {sub}
+                                                        </ListItemText>
+                                                    </ListItemButton>
+                                                </ListItem>
+                                            ))}
+                                        </List>
+                                    </Grow>
+                                </ListItem>
+                            )
+                        }
+                    })}
+                </List>
+            </Box>
         </React.Fragment>
     )
 }

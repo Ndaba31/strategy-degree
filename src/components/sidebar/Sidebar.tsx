@@ -1,12 +1,12 @@
-import { Drawer, useTheme, SwipeableDrawer } from '@mui/material';
+import { Drawer } from '@mui/material';
 import React from 'react'
+import { DrawerContext } from '../../contexts/DrawerContext';
 import SidebarContent from './SidebarContent';
 
 const drawerWidth = 300;
 
 const Sidebar = () => {
-    const theme = useTheme();
-    const [open, setOpen] = React.useState(true);
+    const drawer = React.useContext(DrawerContext)
 
     return (
         <React.Fragment>
@@ -15,6 +15,7 @@ const Sidebar = () => {
                 anchor='left'
                 sx={{
                     width: drawerWidth,
+                    flexShrink: 0,
                     display: {
                         xs: 'none',
                         md: 'initial'
@@ -22,42 +23,33 @@ const Sidebar = () => {
                     '& .MuiDrawer-paper': {
                         width: drawerWidth,
                         boxSizing: 'border-box',
-                        border: '3px solid',
-                        borderTop: 'none',
-                        borderTopRightRadius: 10,
-                        borderBottomRightRadius: 10,
+                        border: 'none',
                         // backgroundColor: '#E3C9D7',
                         backgroundColor: 'lightgrey',
-                        borderColor: theme.palette.primary.main,
                     },
                 }}
             >
                 <SidebarContent />
             </Drawer>
-            <SwipeableDrawer
+            <Drawer
                 anchor='left'
-                open={open}
-                onClose={() => setOpen(false)}
-                onOpen={() => setOpen(true)}
+                open={drawer?.openDrawer}
+                onClose={() => { drawer?.setOpenDrawer(false) }}
+                // onOpen={openDrawer}
                 sx={{
                     width: drawerWidth - 20,
+                    flexShrink: 0,
                     display: {
                         md: 'none'
                     },
                     '& .MuiDrawer-paper': {
                         width: drawerWidth - 20,
                         boxSizing: 'border-box',
-                        border: '3px solid',
-                        borderTop: 'none',
-                        borderTopRightRadius: 10,
-                        borderBottomRightRadius: 10,
-                        backgroundColor: 'lightgrey',
-                        borderColor: theme.palette.primary.main,
                     },
                 }}
             >
                 <SidebarContent />
-            </SwipeableDrawer>
+            </Drawer>
         </React.Fragment>
     )
 }

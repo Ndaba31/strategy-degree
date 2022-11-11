@@ -1,8 +1,7 @@
 import { AccountCircle, Widgets } from '@mui/icons-material'
 import { AppBar, Box, Button, IconButton, List, ListItemButton, ListItemText, Toolbar, Tooltip, Typography, useTheme } from '@mui/material'
 import React from 'react'
-
-type Props = {}
+import { DrawerContext } from '../../contexts/DrawerContext'
 
 const navItems = [
     "Home",
@@ -10,22 +9,36 @@ const navItems = [
     "Pricing",
 ]
 
-const NavBar = (props: Props) => {
+const NavBar = () => {
     const theme = useTheme()
+    const drawer = React.useContext(DrawerContext)
+
+    const toggleDrawer = () => {
+        drawer?.setOpenDrawer(!drawer.openDrawer)
+    }
 
     return (
-        <AppBar color='transparent' sx={{ borderBottom: '1px solid', borderBottomColor: theme.palette.primary.main }}>
+        <AppBar
+            position='fixed'
+            color='transparent'
+            sx={{
+                borderBottom: '1px solid',
+                borderBottomColor: theme.palette.primary.main,
+                zIndex: (theme) => theme.zIndex.drawer + 1
+            }}>
             <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
                 <Box display='flex' alignItems='center' flex={1} sx={{ '&:hover': { color: theme.palette.secondary.main, transform: 'scale(1.1)', transition: '1s ease-in' } }}>
-                    <Tooltip title='Options'>
-                        <IconButton color='primary' size='large'>
+                    <Tooltip title='Options' sx={{ display: { md: 'none' } }}>
+                        <IconButton color='primary' size='large' onClick={toggleDrawer}>
                             <Widgets />
                         </IconButton>
                     </Tooltip>
                     <Box sx={{ display: 'flex' }}>
+                        <Typography variant='h6' fontWeight={900} color='primary' sx={{ display: { xs: 'none', md: 'initial' } }}>360</Typography>
+                        &nbsp;
                         <Typography variant='h6'>Strategic</Typography>
                         &nbsp;
-                        <Typography variant='h6' color='primary'>Degree</Typography>
+                        <Typography variant='h6' fontWeight='bold' color='secondary'>Degree</Typography>
                     </Box>
                 </Box>
                 <List sx={{ display: { xs: 'none', md: 'flex' }, alignItems: 'center', justifyContent: 'space-around', flex: 2 }}>

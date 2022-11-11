@@ -1,10 +1,13 @@
 import React from 'react'
+import Layout from '../components/layout/Layout'
 
 type Props = {}
 
 const Company = (props: Props) => {
     return (
-        <div>Company</div>
+        <Layout>
+            <h1>Company</h1>
+        </Layout>
     )
 }
 
